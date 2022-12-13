@@ -3,8 +3,8 @@
 ## Setup
 Please setup environment variable before running
 - for Windows
-`set POSTGRES_USER=readonly`
-`set POSTGRES_PASSWORD=csdl@2022`
+```set POSTGRES_USER=postgres```
+```set POSTGRES_PASSWORD=postgres```
 
 ## Backend
 ### Installation
