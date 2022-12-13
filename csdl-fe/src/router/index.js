@@ -19,6 +19,33 @@ const routes = [
     name: "dashboard",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/DashboardView.vue"),
+      children: [
+        {
+          path: "/home",
+          name: "homepage",
+          component: () => import("../views/HomePage.vue"),
+        },
+        {
+          path: "/orderinfo",
+          name: "Order Page",
+          component: () => import("../views/OrderInfo.vue"),
+        },
+        {
+          path: "/buyinfo",
+          name: "Sale Page",
+          component: () => import("../views/BuyInfo.vue"),
+        },
+        {
+          path: "/placeorder",
+          name: "Place Order Page",
+          component: () => import("../views/PlaceOrder.vue"),
+        },
+        {
+          path: "/account",
+          name: "Developing Page",
+          component: () => import("../views/Account.vue"),
+        }
+      ],
     meta: {
       authRequired: true,
     },
@@ -30,15 +57,22 @@ const router = createRouter({
   routes,
 });
 
-// router.beforeEach((to, from, next) => {
-//   const auth = getAuth();
-
 //   if (to.matched.some((record) => record.meta.authRequired)) {
-//     if (auth.currentUser) {
+//     if(from.matched.some((x) => x.name === "login")){
 //       next();
 //     } else {
-//       alert("You've must been logged to access this area");
-//       router.push("/");
+//       try{
+//         var auth = this.$store.state.auth.loggedIn;
+//       }catch{
+//         router.push("/");
+//       }
+//       console.log(auth)
+//       if (auth) {
+//         next();
+//       } else {
+//         alert("You've must been logged to access this area");
+//         router.push("/");
+//       }
 //     }
 //   } else {
 //     next();

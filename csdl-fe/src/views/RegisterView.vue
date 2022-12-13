@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+// import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default {
   data() {
@@ -60,26 +60,6 @@ export default {
       // data update
       this.email = submitEvent.target.elements.email.value;
       this.password = submitEvent.target.elements.password.value;
-
-      // firebase registration
-      const auth = getAuth();
-      createUserWithEmailAndPassword(auth, this.email, this.password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          console.log(user);
-          console.log("Registration completed");
-          this.$router.push("/");
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode);
-          console.log(errorMessage);
-          let alert_2 = document.querySelector("#alert_2");
-          alert_2.classList.remove("d-none");
-          alert_2.innerHTML = errorMessage;
-          console.log(alert_2);
-        });
     },
     moveToLogin() {
       this.$router.push("/");

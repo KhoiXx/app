@@ -1,34 +1,46 @@
+
 <template>
+  
   <div class="background"></div>
   <div class="navbar">
     <nav class="nav">
       <div class="nav-el" id="name_project">
         <img src="./assets/logo.png" width="30" class="me-2" alt="" />
-        Vue Firebase Authentication
+        <span>DEMO APP</span>
       </div>
-      <div class="nav-el">
-        <a href="https://github.com/vladpostu/vue-firebase-auth" target="blank"
-          >GitHub Repo</a
-        >
+      <div class="nav-el end">
+        <a @click="signOut" href="#" v-if="isLoggedIn"><span class="glyphicon glyphicon-log-in"></span></a>
       </div>
     </nav>
   </div>
-  <router-view id="content" />
+  <router-view />
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      username: "",
+      password: "",
+    };
+  },
+  methods: {
+    signOut() {
+      this.$store.dispatch("auth/logout");
+      console.log("Sign Out completed");
+      this.$router.push("/");
+    },
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.auth.loggedIn;
+    }
+  }
+};
+</script>
 <style>
 /* CUSTOM STYLE */
 
-#content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 1px solid lightgray;
-  padding: 4rem 4rem;
-  border-radius: 5px;
-  background: #fefefe;
-}
 
 .background {
   width: 100vw;
@@ -38,11 +50,14 @@
 }
 
 .navbar {
-  background: #fafafa;
+  z-index: 1;
+  background: #327b95;
   position: absolute;
-  top: 0;
-  width: 100vw;
-  height: 70px;
+  top: 10px;
+  left: 1vw;
+  width: 98vw;
+  height: 60px;
+  border-radius: 10px;
   box-shadow: 6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
     22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
     100px 100px 80px rgba(0, 0, 0, 0.07);
@@ -55,17 +70,41 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background: #fafafa;
+  align-items: center;
+  /* background: #fafafa; */
+}
+.end {
+  width: 85%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  /* font-size: 1.6em; */
 }
 
+.nav-el a {
+  color: #ffffff;
+  text-decoration: none;
+  line-height: 100%;
+  font-size: 1.6em;
+  /* padding: 14px 20px; */
+  font-weight: bold;
+  font-family: 'Be Vietnam Pro', sans-serif ;
+}
 #name_project {
-  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  line-height: 100%;
+  font-size: 1.6em;
+  /* padding: 14px 20px; */
+  font-weight: bold;
+  font-family: 'Be Vietnam Pro', sans-serif ;
 }
 
-.container {
+/* .container {
   width: 400px;
   max-width: 95%;
-}
+} */
 
 .input {
   display: flex;
